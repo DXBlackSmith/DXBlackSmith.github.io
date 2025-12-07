@@ -172,10 +172,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>计算机网络基础</li>
-</ol>
+        <h1 id="“连网”"><a href="#“连网”" class="headerlink" title="“连网”"></a>“连网”</h1><p>平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 <code>wifi</code> 才能访问互联网上的各种资源呢？</p>
+<p>为了搞清楚这个问题，需要搞懂下面几个概念</p>
+<h3 id="主机通过网络通信的方法"><a href="#主机通过网络通信的方法" class="headerlink" title="主机通过网络通信的方法"></a>主机通过网络通信的方法</h3><ul>
+<li>公网直连</li>
+</ul>
+<p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
+<p>这种通常只适用于具有固定公网 IP 的设备连接。</p>
+<p>Ps. 家庭的宽带通常是动态的公网 IP (重启光猫以后会变化)，企业或者云服务器才是静态公网 IP 。</p>
+<ul>
+<li>局域网通信</li>
+</ul>
+<p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
+<p>那么有些时候为了固定比如监控摄像头和打印机的 IP 便于其他设备进行连接，这个时候作为计算机专业的我们，可能会让我们配置静态 IP。</p>
+<p>于是就会接触下面的概念：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 子网掩码：用于划分网络地址和主机地址。同一局域网的所有 IP &amp; 上这个掩码都会得到同一个地址（一般就填 <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span> ）</span><br><span class="line"><span class="number">2.</span> 默认网关：当访问不是局域网的地址的时候，数据包就会发给网关。通常是路由器的内网 IP ，大多数默认网关的 IP 地址的最后一位是 <span class="number">1</span></span><br><span class="line"><span class="number">3.</span> DNS 服务器：用于将输入的域名解析成 IP 地址，比较方便。DNS 服务器通常填 <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span> 这种公共 DNS 服务器即可</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>通过跳板机中转</li>
+</ul>
+<p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
+<ul>
+<li>内网穿透</li>
+</ul>
+<h3 id="连网实际发生的东西"><a href="#连网实际发生的东西" class="headerlink" title="连网实际发生的东西"></a>连网实际发生的东西</h3>
       
 
       
