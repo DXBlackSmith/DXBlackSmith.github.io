@@ -175,21 +175,18 @@
         <h1 id="“连网”"><a href="#“连网”" class="headerlink" title="“连网”"></a>“连网”</h1><p>平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 <code>wifi</code> 才能访问互联网上的各种资源呢？</p>
 <p>为了搞清楚这个问题，需要搞懂下面几个概念</p>
 <p><strong>连网</strong>：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。</p>
-<h3 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h3><ul>
-<li><strong>公网直连</strong></li>
-</ul>
-<p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
+<h2 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h2><h3 id="公网直连"><a href="#公网直连" class="headerlink" title="公网直连"></a>公网直连</h3><p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
 <p>这种通常只适用于具有固定公网 IP 的设备连接。</p>
 <p>家庭的宽带通常是动态的公网 IP (重启光猫以后会变化)，企业或者云服务器才是静态公网 IP 。</p>
-<hr>
-<p>到这就可以解释在家里为什么只有连接 <code>wifi</code> （连接路由器）才能访问互联网上的各种资源。</p>
+<ul>
+<li>解释家里为什么只有连接 <code>wifi</code> （连接路由器）才能访问互联网上的各种资源。</li>
+</ul>
 <p>只要是需要访问互联网上的资源，那么都需要设备具有<strong>公网 IP</strong>， 但是手机等设备出厂时只有 <code>mac</code> 地址，连接路由器的才会给你分配 IP 地址（IP 地址是逻辑地址，由网络环境决定的），但是就算给你分配了，也只是<strong>内网 IP</strong>，路由器才是唯一具有公网 IP 的设备。</p>
 <p>不过连接的路由器会将你的内网 IP 结合自己的 WAN 口（公网 IP）转换成公网 IP，收到回复包的时候，又将这个公网 IP 转换成内网 IP 从而找到你的设备，这其中牵扯到的协议叫做 <strong>NAT 协议</strong>，这里先不仔细讲了，大概是实现了地址转换的意思。</p>
-<p>Ps. 用 <code>4G/5G</code> 是不经过家用路由器，直接通过基站连接到运营商的核心网，然后运营商给你分配 CGNATIP&#x2F; 公网 IP 。</p>
-<ul>
-<li><strong>局域网通信</strong></li>
-</ul>
-<p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
+<blockquote>
+<p>Ps. 用 <code>4G/5G</code> 是不经过家用路由器，直接通过基站连接到运营商的核心网，然后运营商给你分配 CGNAT IP&#x2F; 公网 IP 。</p>
+</blockquote>
+<h3 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h3><p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
 <p>那么有些时候为了固定比如监控摄像头和打印机的 IP 或者实验室根本就没有路由器（纯内网通信），这个时候作为计算机专业的我们，可能会让我们配置静态 IP。</p>
 <p>于是就会接触下面的概念：</p>
 <ol>
@@ -201,8 +198,9 @@
 <p>这个时候只需要所有的机器都在同一个网段，比如</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">IP: 不冲突就行</span><br><span class="line">	机器 A : <span class="number">192.168</span><span class="number">.10</span><span class="number">.10</span> </span><br><span class="line">	机器 B : <span class="number">192.168</span><span class="number">.10</span><span class="number">.11</span></span><br><span class="line">	机器 B : <span class="number">192.168</span><span class="number">.10</span><span class="number">.12</span>  </span><br><span class="line">子网掩码：</span><br><span class="line">    统一填 <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span>     </span><br><span class="line">默认网关:</span><br><span class="line">	一般留空（<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)，因为一般不需要上网</span><br><span class="line">DNS：</span><br><span class="line">    一般也留空，除非你要解析域名，但是一般内网用 IP 地址</span><br></pre></td></tr></table></figure>
 
-<hr>
-<p>不过一般不会让你配所有的设备的静态 IP ，通常是一个设备的静态 IP 。这个时候只需要做</p>
+<ul>
+<li>如何配置一个新设备的静态 IP</li>
+</ul>
 <ol>
 <li>记录同网段下另一台配置好得设备的网段 （IP + 子网掩码 192.168.31.0&#x2F;24）和默认网关（ 192.168.31.1）</li>
 <li>选择一个不冲突的静态 IP（ping 一下看看连不连通），登录设备的管理界面，这个一般根据设备的不同有些许不同，可以查看下表：</li>
@@ -235,14 +233,12 @@
 <li>配置 IP 参数（一般内网就配置 IP 地址和子网掩码就可以）同时保存验证，比如用新 IP 能够重新访问设备的管理界面和用其他设备 ping 一下这个设备来测试连通。</li>
 </ol>
 <hr>
-<ul>
-<li><strong>通过跳板机中转</strong></li>
-</ul>
-<p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
+<h3 id="通过跳板机中转"><a href="#通过跳板机中转" class="headerlink" title="通过跳板机中转"></a>通过跳板机中转</h3><p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
 <p>比如公司的数据库服务器，或者内部的 API 服务部署在私有网络中，处于安全考虑不允许直接暴露到互联网中。所以他们<strong>没有公网 IP</strong>，同时又不可能和你在一个<strong>局域网</strong>内，这个时候就需要先登录一台有公网 IP 的跳板机，再从它跳转过去。</p>
 <p>这样目标服务器就实现了完全隔离，其防火墙只允许跳板机 IP 访问 SSH 端口。</p>
-<hr>
-<p>那么我们如何能够通过跳板机来连接目标服务器呢？</p>
+<ul>
+<li>那么我们如何能够通过跳板机来连接目标服务器呢？</li>
+</ul>
 <p>最推荐的就是直接编辑<strong>本地电脑</strong>的 SSH 配置文件（~&#x2F;.ssh&#x2F;config 文件）。假如我们有如下信息</p>
 <table>
 <thead>
@@ -265,10 +261,7 @@
 
 <p><code>vscode</code> 下载相应的插件以后读取这个配置，就能直接连接内部服务器，实现代码编辑和文件上传（vscode 内置的 SFTP ）。也有人用 xftp 或者 Filezilla 来实现文件传输，我没用过，所以暂时不评论。</p>
 <p>Ps. <code>vscode</code> 具体操作就是调出命令面板，remote-ssh: connet to host。</p>
-<ul>
-<li><strong>内网穿透</strong></li>
-</ul>
-<p>这个暂时没有接触到，先挖个坑。。。</p>
+<h3 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h3><p>这个暂时没有接触到，先挖个坑。。。</p>
 
       
 
