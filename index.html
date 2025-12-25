@@ -175,7 +175,7 @@
         <h1 id="“连网”"><a href="#“连网”" class="headerlink" title="“连网”"></a>“连网”</h1><p>平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 <code>wifi</code> 才能访问互联网上的各种资源呢？</p>
 <p>为了搞清楚这个问题，需要搞懂下面几个概念</p>
 <p><strong>连网</strong>：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。</p>
-<h2 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h2><h3 id="公网直连"><a href="#公网直连" class="headerlink" title="公网直连"></a>公网直连</h3><p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
+<h2 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h2><h3 id="公网通信"><a href="#公网通信" class="headerlink" title="公网通信"></a>公网通信</h3><p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
 <p>这种通常只适用于具有固定公网 IP 的设备连接。</p>
 <p>家庭的宽带通常是动态的公网 IP (重启光猫以后会变化)，企业或者云服务器才是静态公网 IP 。</p>
 <ul>
@@ -186,7 +186,7 @@
 <blockquote>
 <p>Ps. 用 <code>4G/5G</code> 是不经过家用路由器，直接通过基站连接到运营商的核心网，然后运营商给你分配 CGNAT IP&#x2F; 公网 IP 。</p>
 </blockquote>
-<h3 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h3><p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
+<h3 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h3><h4 id="同一局域网内通信"><a href="#同一局域网内通信" class="headerlink" title="同一局域网内通信"></a>同一局域网内通信</h4><p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
 <p>那么有些时候为了固定比如监控摄像头和打印机的 IP 或者实验室根本就没有路由器（纯内网通信），这个时候作为计算机专业的我们，可能会让我们配置静态 IP。</p>
 <p>于是就会接触下面的概念：</p>
 <ol>
@@ -233,7 +233,10 @@
 <li>配置 IP 参数（一般内网就配置 IP 地址和子网掩码就可以）同时保存验证，比如用新 IP 能够重新访问设备的管理界面和用其他设备 ping 一下这个设备来测试连通。</li>
 </ol>
 <hr>
-<h3 id="通过跳板机中转"><a href="#通过跳板机中转" class="headerlink" title="通过跳板机中转"></a>通过跳板机中转</h3><p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
+<h4 id="不同局域网之间通信"><a href="#不同局域网之间通信" class="headerlink" title="不同局域网之间通信"></a>不同局域网之间通信</h4><ul>
+<li><h4 id="通过跳板机中转"><a href="#通过跳板机中转" class="headerlink" title="通过跳板机中转"></a>通过跳板机中转</h4></li>
+</ul>
+<p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
 <p>比如公司的数据库服务器，或者内部的 API 服务部署在私有网络中，处于安全考虑不允许直接暴露到互联网中。所以他们<strong>没有公网 IP</strong>，同时又不可能和你在一个<strong>局域网</strong>内，这个时候就需要先登录一台有公网 IP 的跳板机，再从它跳转过去。</p>
 <p>这样目标服务器就实现了完全隔离，其防火墙只允许跳板机 IP 访问 SSH 端口。</p>
 <ul>
@@ -261,7 +264,10 @@
 
 <p><code>vscode</code> 下载相应的插件以后读取这个配置，就能直接连接内部服务器，实现代码编辑和文件上传（vscode 内置的 SFTP ）。也有人用 xftp 或者 Filezilla 来实现文件传输，我没用过，所以暂时不评论。</p>
 <p>Ps. <code>vscode</code> 具体操作就是调出命令面板，remote-ssh: connet to host。</p>
-<h3 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h3><p>这个暂时没有接触到，先挖个坑。。。</p>
+<ul>
+<li><h4 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h4></li>
+</ul>
+<p>这个暂时没有接触到，先挖个坑。。。</p>
 
       
 
@@ -275,6 +281,81 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2025/12/07/NetWork/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Hot100 记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Hot-100-刷题记录"><a href="#Hot-100-刷题记录" class="headerlink" title="Hot 100 刷题记录"></a>Hot 100 刷题记录</h1><h3 id="（1）滑动窗口套路"><a href="#（1）滑动窗口套路" class="headerlink" title="（1）滑动窗口套路"></a>（1）滑动窗口套路</h3><ul>
+<li><strong>定长滑动窗口</strong></li>
+</ul>
+<p>总结成三步：<strong>入-更新-出</strong>。</p>
+<p><strong>入</strong>：下标为 i 的元素进入窗口，更新相关统计量。如果窗口左端点 i−k+1&lt;0，即 i&lt;k−1，则尚未形成第一个窗口，重复第一步。</p>
+<p><strong>更新</strong>：更新答案。一般是更新最大值&#x2F;最小值。</p>
+<p><strong>出</strong>：下标为 i−k+1 的元素离开窗口，更新相关统计量，为下一个循环做准备。</p>
+<p>比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span>(uset.<span class="built_in">count</span>(s[i])) cnt ++;	<span class="comment">// 入</span></span><br><span class="line">    res = std::<span class="built_in">max</span>(res, cnt);		<span class="comment">// 更新答案</span></span><br><span class="line">    <span class="keyword">if</span>(i &lt; k - <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">if</span>(uset.<span class="built_in">count</span>(s[i - k + <span class="number">1</span>])) cnt --; <span class="comment">// 出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>不定长滑动窗口</strong></li>
+</ul>
+<ol>
+<li>越长越合法：</li>
+</ol>
+<p>采取在 while 循环<strong>外</strong>更新答案</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(...) &#123;</span><br><span class="line">	umap[c] ++;	<span class="comment">// 入</span></span><br><span class="line">    <span class="keyword">while</span>(umap[c] &gt; <span class="number">1</span>) &#123; <span class="comment">// 合法性判断</span></span><br><span class="line">        umap[s[left]] --; <span class="comment">// 出</span></span><br><span class="line">        left ++; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 更新</span></span><br><span class="line">    ans = std::<span class="built_in">max</span>(ans, right - left + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>越短越合法：</li>
+</ol>
+<p>采取在 while 循环<strong>内</strong>更新答案</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(...) &#123;</span><br><span class="line">	sum += nums[right];	 <span class="comment">// 入</span></span><br><span class="line">    <span class="keyword">while</span>(sum &gt;= target) &#123; <span class="comment">// 合法性判断</span></span><br><span class="line">        res = <span class="built_in">min</span>(res, right - left + <span class="number">1</span>); <span class="comment">// 更新</span></span><br><span class="line">        sum -= nums[left];	<span class="comment">// 出</span></span><br><span class="line">        left ++;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>求子数组个数：</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/07/15/Hot100%20%E8%AE%B0%E5%BD%95/">展开全文 >></a>
         </p>
       
 
