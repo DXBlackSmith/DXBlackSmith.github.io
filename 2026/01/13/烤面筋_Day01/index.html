@@ -27,7 +27,7 @@
 <meta property="og:description" content="烤面筋 Day 01 原子操作与内存模型: 1. 原子操作是什么？Atomic 跟原子操作的关系是什么？答：原子操作就是要么不执行，要么全部执行成功，且中途不能被中断的操作。Atomic 就是 C++ 11 提供的标准库模板类，是原子操作在语言层面的封装和工具。 2. Atomic 底层是怎么实现的？答：底层主要依赖硬件层面处理器提供的原子指令，在 x86 架构下，通常会使用带有 LOCK 前缀的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-13T10:14:19.695Z">
-<meta property="article:modified_time" content="2026-01-13T15:34:29.155Z">
+<meta property="article:modified_time" content="2026-01-14T07:11:17.577Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -282,8 +282,8 @@
 <p>编译器层面也会根据不同的 CPU 架构，将 <code>atomic</code> 操作映射为相应的机器指令，根据指定的内存序，插入必要的 Memory Barrier ，防止指令重排。</p>
 <h3 id="3-能简单讲讲-C-的内存序（Memory-Order）吗？"><a href="#3-能简单讲讲-C-的内存序（Memory-Order）吗？" class="headerlink" title="3. 能简单讲讲 C++ 的内存序（Memory Order）吗？"></a>3. 能简单讲讲 C++ 的内存序（Memory Order）吗？</h3><p>内存序的作用是<strong>约束编译器和 CPU 的指令重排优化</strong>，C++11 定义了 6 种内存序，但常用的是 <code>memory_order_relaxed</code> 和 获取&#x2F;释放语义和序列一致性。</p>
 <p>宽松顺序：只保证当前操作的<strong>原子性</strong>，不保证任何顺序（没有同步关系）。</p>
-<p>释放语义：保证在此之前的读写操作绝不能重排到此操作之后。就像在代码里打了一个“禁止向下越界”的标记。</p>
-<p>获取语义：保证在此之后的读写操作绝不能重排到此操作之前。就像打了一个“禁止向上越界”的标记（保证线程间的逻辑先后顺序（同步））。</p>
+<p>释放（release）语义：持有 <code>release</code> 的线程是发布者，，逻辑是 “做完手头的事情了，现在发布表示数据准备好了”</p>
+<p>获取（acquire）语义：持有 <code>acquire</code> 的线程是获取者，逻辑是 “看到发布的通知了，说明我可以放心去用数据了”</p>
 <p>序列一致性：atomic 的默认参数，要求所有线程看到的执行顺序都是一模一样的，就像所有操作都排在一个全局队列里依次执行。</p>
 <ul>
 <li>那为什么不能全用默认的 <code>seq_cst</code> 序列一致性的内存序？</li>
@@ -418,6 +418,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/01/14/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day02/" title="烤面筋 Day 02">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">烤面筋 Day 02</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

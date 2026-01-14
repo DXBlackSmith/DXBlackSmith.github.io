@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="DxBlackSmith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="烤面筋 Day 02 类型转换1. 向上转型 vs 向下转型?这是多态中两个方向完全相反的操作： 向上转型：  定义：将子类的指针或引用转换成父类 安全性：绝对安全。因为子类也是一种父类 用法：这种转换是隐式，不需要显式调用 static_cast ，是实现多态的基础  向下转型：  定义：将父类的指针或引用转换为子类。 安全性： 不安全。父类对象不一定是子类。 用法：必须使用显式转换，出于安全保">
+<meta property="og:type" content="article">
+<meta property="og:title" content="烤面筋 Day 02">
+<meta property="og:url" content="http://example.com/2026/01/14/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day02/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="烤面筋 Day 02 类型转换1. 向上转型 vs 向下转型?这是多态中两个方向完全相反的操作： 向上转型：  定义：将子类的指针或引用转换成父类 安全性：绝对安全。因为子类也是一种父类 用法：这种转换是隐式，不需要显式调用 static_cast ，是实现多态的基础  向下转型：  定义：将父类的指针或引用转换为子类。 安全性： 不安全。父类对象不一定是子类。 用法：必须使用显式转换，出于安全保">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-14T07:13:34.486Z">
+<meta property="article:modified_time" content="2026-01-14T07:34:33.798Z">
+<meta property="article:author" content="DxBlackSmith">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>烤面筋 Day 02 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Xin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="烤面筋 Day 02"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-14 15:13" pubdate>
+          2026年1月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">烤面筋 Day 02</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="烤面筋-Day-02"><a href="#烤面筋-Day-02" class="headerlink" title="烤面筋 Day 02"></a>烤面筋 Day 02</h1><hr>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="1-向上转型-vs-向下转型"><a href="#1-向上转型-vs-向下转型" class="headerlink" title="1. 向上转型 vs 向下转型?"></a>1. 向上转型 vs 向下转型?</h3><p>这是多态中两个方向完全相反的操作：</p>
+<p>向上转型：</p>
+<ul>
+<li>定义：将子类的指针或引用转换成父类</li>
+<li>安全性：绝对安全。因为子类也是一种父类</li>
+<li>用法：这种转换是隐式，不需要显式调用 <code>static_cast</code> ，是实现多态的基础</li>
+</ul>
+<p>向下转型：</p>
+<ul>
+<li>定义：将<strong>父类</strong>的指针或引用转换为<strong>子类</strong>。</li>
+<li>安全性： <strong>不安全</strong>。父类对象不一定是子类。</li>
+<li>用法：必须使用显式转换，出于安全保证使用 <code>dynamic_cast</code></li>
+</ul>
+<h3 id="2-static-cast-与-dynamic-cast-的区别？"><a href="#2-static-cast-与-dynamic-cast-的区别？" class="headerlink" title="2. static_cast 与 dynamic_cast 的区别？"></a>2. <code>static_cast</code> 与 <code>dynamic_cast</code> 的区别？</h3><p>本质区别在于 “转换发生的时机” 和 “安全检查的机制”</p>
+<p><code>static_cast</code>：</p>
+<ul>
+<li>在编译阶段完成，不进行运行时类型检查</li>
+<li>主要用于基本类型转换（如 <code>int</code> 转 <code>float</code>），非多态层级结构内的指针&#x2F;引用转换。</li>
+</ul>
+<p><code>dynamic_cast</code>：</p>
+<ul>
+<li><p>在运行阶段利用 <strong>RTTI（运行时类型信息）</strong> 检查转换是否合法</p>
+</li>
+<li><p>专门用于处理**多态（Polymorphism）**层级结构中的转换</p>
+</li>
+</ul>
+<h3 id="3-static-cast-在什么场景有风险？"><a href="#3-static-cast-在什么场景有风险？" class="headerlink" title="3. static_cast 在什么场景有风险？"></a>3. <code>static_cast</code> 在什么场景有风险？</h3><p><code>static_cast</code> 的风险主要发生在 <strong>向下转型（Downcasting）</strong>，即把基类指针转换为派生类指针时：</p>
+<ul>
+<li><p>风险点： 如果该基类指针实际上并没有指向那个派生类对象，<code>static_cast</code> 依然会强行转换成功，返回一个地址。</p>
+</li>
+<li><p>后果： 当你通过这个转换后的指针访问派生类特有的成员变量或虚函数时，会发生<strong>未定义行为（Undefined Behavior）</strong>，通常表现为内存越界访问或程序崩溃，且这种错误在编译期无法察觉。</p>
+</li>
+</ul>
+<h3 id="4-dynamic-cast-的优势是什么？"><a href="#4-dynamic-cast-的优势是什么？" class="headerlink" title="4. dynamic_cast 的优势是什么？"></a>4. <code>dynamic_cast</code> 的优势是什么？</h3><p>它的核心优势是 <strong>“安全性”</strong>：</p>
+<ul>
+<li><p>类型安全检查： 它会检查目标类型是否与对象的实际类型匹配。如果转换非法，对于指针会返回 <code>nullptr</code>，对于引用会抛出 <code>std::bad_cast</code> 异常。</p>
+</li>
+<li><p>支持虚继承转换： 在复杂的深层或菱形继承中，<code>dynamic_cast</code> 能够正确处理指针偏移。</p>
+</li>
+</ul>
+<hr>
+<h2 id="Reactor-线程池"><a href="#Reactor-线程池" class="headerlink" title="Reactor + 线程池"></a><code>Reactor + 线程池</code></h2><h3 id="1-Reactor-模式是怎么实现的？"><a href="#1-Reactor-模式是怎么实现的？" class="headerlink" title="1. Reactor 模式是怎么实现的？"></a>1. <code>Reactor</code> 模式是怎么实现的？</h3><p>Reactor 模式本质上是 “I&#x2F;O 复用 + 派发”，其核心组件包括：</p>
+<ol>
+<li>Event Demultiplexer：底层通常是 <code>epoll</code>或者 <code>iocp</code> ，监听注册了的一堆文件描述符有哪些动静</li>
+<li>Reactor：核心循环。通过多路分离器等待事件发生，一旦有事件（如可读、可写），就将其分发（Dispatch）给对应的 Handler。</li>
+<li>Handlers：绑定在事件上的回调函数，负责非阻塞的读写操作。</li>
+</ol>
+<h3 id="2-为什么采用主从-Reactor-线程池？"><a href="#2-为什么采用主从-Reactor-线程池？" class="headerlink" title="2. 为什么采用主从 Reactor + 线程池？"></a>2. 为什么采用主从 Reactor + 线程池？</h3><p>主要是为了解决单线程 <code>Reactor</code> 的性能瓶颈：</p>
+<ul>
+<li><p>分工明确：<strong>Main Reactor</strong> 只负责监听连接（Accept），<strong>Sub Reactor</strong> 负责处理已连接套接字的 I&#x2F;O 事件。这避免了因为某个请求的 I&#x2F;O 耗时过长导致新连接无法进入。</p>
+</li>
+<li><p>充分利用多核： 多个 Sub Reactor 可以运行在不同的 CPU 核心上，并行处理 I&#x2F;O。</p>
+</li>
+<li><p>解耦计算：<strong>线程池</strong> 将业务计算逻辑从 I&#x2F;O 线程中剥离。如果业务逻辑耗时较长，它不会阻塞 I&#x2F;O 事件的分发，从而极大提高了系统的吞吐量。</p>
+</li>
+</ul>
+<p>Ps. 这里的 I&#x2F;O 线程处理的是 I&#x2F;O 读写，指的是从<strong>网卡驱动缓存</strong>拷贝到用户缓存区，或者将用户态数据拷贝到<strong>内核发送缓存区</strong>。业务计算逻辑则是加工数据（数据读上来以后，程序需要处理它），例如协议解析（二进制流解包成 Protobuf 或 JSON），数据库查询（根据请求差 SQL）等等</p>
+<h3 id="3-CPU-密集型和-I-O-密集型怎么判断？"><a href="#3-CPU-密集型和-I-O-密集型怎么判断？" class="headerlink" title="3. CPU 密集型和 I&#x2F;O 密集型怎么判断？"></a>3. CPU 密集型和 I&#x2F;O 密集型怎么判断？</h3><p>主要是看瓶颈在哪里：$N_{cpu}$ 是 CPU 核心数的意思</p>
+<p>CPU 密集型：</p>
+<ul>
+<li><strong>特点</strong>：大部分时间在做复杂的运算（图像处理、科学计算）</li>
+<li><strong>判断</strong>： 程序运行时，CPU 占用率极高，但几乎没有磁盘或网络 I&#x2F;O。</li>
+<li><strong>线程池策略：</strong> 线程数通常设置为 <strong>$N_{CPU} + 1$</strong>。</li>
+</ul>
+<p>I&#x2F;O 密集型：</p>
+<ul>
+<li><strong>特点：</strong> 大部分时间在等待磁盘读写、数据库查询、网络响应。</li>
+<li><strong>判断：</strong> CPU 占用率较低，系统大量时间处于等待状态（Wait）。</li>
+<li><strong>线程池策略：</strong> 线程数可以设置得大一些，如 <strong>$2N_{CPU}$</strong> 甚至更多。</li>
+</ul>
+<h3 id="4-线程池线程数如何确定？"><a href="#4-线程池线程数如何确定？" class="headerlink" title="4. 线程池线程数如何确定？"></a>4. 线程池线程数如何确定？</h3><p>首先针对于 I&#x2F;O 密集型任务来说，一般设置为内核数 * 2。</p>
+<p>当一个线程因为 I&#x2F;O 阻塞或等待时，CPU 可以切换到另一个线程。避免过多的上下文切换（Context Switch）带来的损耗。</p>
+<p>不过在实际生产环境下，我会优先通过 <strong>压力测试</strong> 和 <strong>性能监控</strong>（如查看 <code>top</code> 中的 <code>iowait</code> 指标）来动态调整线程数，而不会死守</p>
+<p>公式。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C-%E9%9D%A2%E7%BB%8F/" class="category-chain-item">C++ 面经</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>烤面筋 Day 02</div>
+      <div>http://example.com/2026/01/14/烤面筋_Day02/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>DxBlackSmith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/13/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day01/" title="烤面筋 Day 01">
+                        <span class="hidden-mobile">烤面筋 Day 01</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
