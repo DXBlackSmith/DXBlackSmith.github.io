@@ -19,21 +19,21 @@
   <meta name="author" content="DxBlackSmith">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hot 100 刷题记录（1）滑动窗口套路 定长滑动窗口  总结成三步：入-更新-出。 入：下标为 i 的元素进入窗口，更新相关统计量。如果窗口左端点 i−k+1&lt;0，即 i&lt;k−1，则尚未形成第一个窗口，重复第一步。 更新：更新答案。一般是更新最大值&#x2F;最小值。 出：下标为 i−k+1 的元素离开窗口，更新相关统计量，为下一个循环做准备。 比如 123456for(int i">
+    <meta name="description" content="烤面筋 Day 03多态与虚函数表：1. 多态的定义是什么？分类有哪些？答：多态是允许基类的指针或引用在运行时根据实际指向的子类对象类型，调用相应子类重写方法的能力。主要分为两类。  静态多态（编译时多态）：通过函数重载和**模板（泛型编程）**实现。编译器在编译期间就确定了调用的函数版本。  动态多态（运行时多态）：通过虚函数（Virtual Function）和继承来时实现。程序在运行期间根据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hot 100 刷题记录">
-<meta property="og:url" content="http://example.com/2025/01/13/Hot100%20%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="烤面筋 Day 03">
+<meta property="og:url" content="http://example.com/2026/01/16/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day03/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Hot 100 刷题记录（1）滑动窗口套路 定长滑动窗口  总结成三步：入-更新-出。 入：下标为 i 的元素进入窗口，更新相关统计量。如果窗口左端点 i−k+1&lt;0，即 i&lt;k−1，则尚未形成第一个窗口，重复第一步。 更新：更新答案。一般是更新最大值&#x2F;最小值。 出：下标为 i−k+1 的元素离开窗口，更新相关统计量，为下一个循环做准备。 比如 123456for(int i">
+<meta property="og:description" content="烤面筋 Day 03多态与虚函数表：1. 多态的定义是什么？分类有哪些？答：多态是允许基类的指针或引用在运行时根据实际指向的子类对象类型，调用相应子类重写方法的能力。主要分为两类。  静态多态（编译时多态）：通过函数重载和**模板（泛型编程）**实现。编译器在编译期间就确定了调用的函数版本。  动态多态（运行时多态）：通过虚函数（Virtual Function）和继承来时实现。程序在运行期间根据">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-13T10:05:08.000Z">
-<meta property="article:modified_time" content="2026-01-15T16:09:31.143Z">
+<meta property="article:published_time" content="2026-01-15T16:08:37.654Z">
+<meta property="article:modified_time" content="2026-01-15T16:09:13.147Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hot 100 刷题记录 - Hexo</title>
+  <title>烤面筋 Day 03 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hot 100 刷题记录"></span>
+            <span id="subtitle" data-typed-text="烤面筋 Day 03"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-13 18:05" pubdate>
-          2025年1月13日 晚上
+        <time datetime="2026-01-16 00:08" pubdate>
+          2026年1月16日 凌晨
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          282 字
+          1.3k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          12 分钟
         
       </span>
     
@@ -270,41 +270,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hot 100 刷题记录</h1>
+            <h1 id="seo-header">烤面筋 Day 03</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Hot-100-刷题记录"><a href="#Hot-100-刷题记录" class="headerlink" title="Hot 100 刷题记录"></a>Hot 100 刷题记录</h1><h3 id="（1）滑动窗口套路"><a href="#（1）滑动窗口套路" class="headerlink" title="（1）滑动窗口套路"></a>（1）滑动窗口套路</h3><ul>
-<li><strong>定长滑动窗口</strong></li>
-</ul>
-<p>总结成三步：<strong>入-更新-出</strong>。</p>
-<p><strong>入</strong>：下标为 i 的元素进入窗口，更新相关统计量。如果窗口左端点 i−k+1&lt;0，即 i&lt;k−1，则尚未形成第一个窗口，重复第一步。</p>
-<p><strong>更新</strong>：更新答案。一般是更新最大值&#x2F;最小值。</p>
-<p><strong>出</strong>：下标为 i−k+1 的元素离开窗口，更新相关统计量，为下一个循环做准备。</p>
-<p>比如</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>    <span class="hljs-keyword">if</span>(uset.<span class="hljs-built_in">count</span>(s[i])) cnt ++;	<span class="hljs-comment">// 入</span><br>    res = std::<span class="hljs-built_in">max</span>(res, cnt);		<span class="hljs-comment">// 更新答案</span><br>    <span class="hljs-keyword">if</span>(i &lt; k - <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;<br>    <span class="hljs-keyword">if</span>(uset.<span class="hljs-built_in">count</span>(s[i - k + <span class="hljs-number">1</span>])) cnt --; <span class="hljs-comment">// 出</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
+                <h1 id="烤面筋-Day-03"><a href="#烤面筋-Day-03" class="headerlink" title="烤面筋 Day 03"></a>烤面筋 Day 03</h1><h2 id="多态与虚函数表："><a href="#多态与虚函数表：" class="headerlink" title="多态与虚函数表："></a>多态与虚函数表：</h2><h2 id="1-多态的定义是什么？分类有哪些？"><a href="#1-多态的定义是什么？分类有哪些？" class="headerlink" title="1. 多态的定义是什么？分类有哪些？"></a>1. 多态的定义是什么？分类有哪些？</h2><p>答：多态是允许<strong>基类</strong>的指针或引用在运行时根据实际指向的<strong>子类对象类型</strong>，调用相应子类重写方法的能力。主要分为两类。</p>
 <ul>
-<li><strong>不定长滑动窗口</strong></li>
+<li><p><strong>静态多态（编译时多态）</strong>：通过<strong>函数重载</strong>和**模板（泛型编程）**实现。编译器在编译期间就确定了调用的函数版本。</p>
+</li>
+<li><p><strong>动态多态（运行时多态）</strong>：通过<strong>虚函数（Virtual Function）<strong>和</strong>继承</strong>来时实现。程序在运行期间根据对象的实际类型来决定调用哪个函数。</p>
+</li>
 </ul>
-<ol>
-<li>越长越合法：</li>
-</ol>
-<p>采取在 while 循环<strong>外</strong>更新答案</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span>(...) &#123;<br>	umap[c] ++;	<span class="hljs-comment">// 入</span><br>    <span class="hljs-keyword">while</span>(umap[c] &gt; <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 合法性判断</span><br>        umap[s[left]] --; <span class="hljs-comment">// 出</span><br>        left ++; <br>    &#125;<br>    <span class="hljs-comment">// 更新</span><br>    ans = std::<span class="hljs-built_in">max</span>(ans, right - left + <span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="2-虚函数是什么？虚函数表和虚函数指针有什么用？"><a href="#2-虚函数是什么？虚函数表和虚函数指针有什么用？" class="headerlink" title="2. 虚函数是什么？虚函数表和虚函数指针有什么用？"></a>2. 虚函数是什么？虚函数表和虚函数指针有什么用？</h3><p>答：虚函数是允许在派生类中被重写、并通过基类指针或引用实现运行时多态的函数。是实现<strong>动态多态</strong>的基石</p>
+<ul>
+<li>虚函数表： 每个拥有虚函数的<strong>类</strong>都有一个虚表。它本质上是一个存放虚函数地址的数组。</li>
+<li>虚函数指针： 每个具体的<strong>对象</strong>实例中都有一个隐藏指针，指向该类对应的虚函数表。</li>
+</ul>
+<p>当通过基类指针调用虚函数时，程序先通过对象的虚指针找到虚函数表，再根据偏移量找到对应的函数地址并执行，从而实现动态绑定。即通过虚指针在运行时查找正确的函数实现。</p>
+<h3 id="3-继承关系中的虚函数表是-“拷贝”-还是-“共享”？"><a href="#3-继承关系中的虚函数表是-“拷贝”-还是-“共享”？" class="headerlink" title="3. 继承关系中的虚函数表是 “拷贝” 还是 “共享”？"></a>3. 继承关系中的虚函数表是 “拷贝” 还是 “共享”？</h3><p>答：派生类会继承基类的虚函数表结构，但会生成一份属于自己的新表。</p>
+<ul>
+<li><strong>继承与拷贝：</strong> 派生类创建时，会首先<strong>拷贝</strong>基类的虚表内容到自己的新虚表中。</li>
+<li><strong>重写（Override）：</strong> 如果派生类重写了某个虚函数，编译器会用派生类自己的函数地址，**覆盖（Overwrite）**掉新虚表中原来基类的函数地址。</li>
+<li><strong>新增：</strong> 如果派生类定义了新的虚函数，这些地址会按顺序添加到新虚表的末尾。</li>
+<li><strong>结论：</strong> 基类和派生类拥有<strong>各自独立</strong>的虚函数表，互不干扰。</li>
+</ul>
+<h3 id="4-下面的-B-对象占多大的内存空间？"><a href="#4-下面的-B-对象占多大的内存空间？" class="headerlink" title="4. 下面的 B 对象占多大的内存空间？"></a>4. 下面的 B 对象占多大的内存空间？</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-type">char</span> a;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">add1</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span> &#123;<br>	<span class="hljs-type">char</span> aa;<br>   	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">add2</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">public</span> A, <span class="hljs-keyword">public</span> C &#123;<br>    <span class="hljs-type">short</span> a2;<br>    <span class="hljs-type">int</span> a;<br>    <span class="hljs-type">short</span> b;<br>    <span class="hljs-type">int</span> c;<br>    <span class="hljs-type">char</span> d;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add1</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add2</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>越短越合法：</li>
-</ol>
-<p>采取在 while 循环<strong>内</strong>更新答案</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span>(...) &#123;<br>	sum += nums[right];	 <span class="hljs-comment">// 入</span><br>    <span class="hljs-keyword">while</span>(sum &gt;= target) &#123; <span class="hljs-comment">// 合法性判断</span><br>        res = <span class="hljs-built_in">min</span>(res, right - left + <span class="hljs-number">1</span>); <span class="hljs-comment">// 更新</span><br>        sum -= nums[left];	<span class="hljs-comment">// 出</span><br>        left ++;	<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>答：首先两个基础，创建一个 B 对象，这个对象的内存分布是怎么样的。构造一个派生类对象，它的内存布局里面肯定存在<strong>基类的子对象</strong>（以及其虚指针），如下图所示：</p>
+<p>![image-20251029202359749](E:\Document\Garbage\Typora Files\image-20251029202359749-1768492539172-1.png)</p>
+<p>图中的 <code>vptr</code>分别指向自己类的虚函数表，通常一个类的虚指针放在内存布局的最前面，所以这里 B 的虚指针一般会把 A 的虚指针给覆盖掉。</p>
+<p><strong>构造</strong>一个子类对象：首先会先去构建基类的对象内容，比如这里的 A 和 C，然后再构造自己的内容。</p>
+<p><strong>析构</strong>一个子类对象：和构造相反，先执行自己的析构函数，然后去执行基类的析构函数。</p>
+<hr>
+<p>那这里有个问题，如果 A 的析构函数时虚函数的话，之前覆盖了 A 的虚指针，这里就找不到 A 的虚函数表，那么如何找到析构 A 的内容呢？</p>
+<p>答案就是编译器会在调用 B 的虚构函数的时候，就把头部的虚指针重置为 A 的了，所以能够正常执行。</p>
+<hr>
+<p>所以这里我们就明白了解决上面问题最重要的一个点，那就是 B 的内存空间一定会继承基类的虚指针以及基类的一些成员变量。</p>
+<p>那么解决这个问题还需要明白一个知识点，那就是内存对齐。内存对齐的规则是什么呢？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 类的每个基准内存块大小 = 类当中占用内存大小最大的成员变量的内存空间，比如这里的 A，虽然最大的成员变量是 <span class="hljs-number">1</span> 字节，但是它存在虚函数，所以内部有虚指针。又由于虚指针是 <span class="hljs-number">8</span> 字节，所以基准内存块大小就是 <span class="hljs-number">8</span> 字节，所以这里 A 所占用是 <span class="hljs-number">8</span> + <span class="hljs-number">8</span> = <span class="hljs-number">16</span> 字节<br><span class="hljs-number">2.</span> 每个类型的起始地址都是该类型大小的整数倍，比如 <span class="hljs-type">int</span> 的成员变量，那么它的起始地址只有可能是 <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>, ....<br></code></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>求子数组个数：</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">暂时还没刷到<br></code></pre></td></tr></table></figure>
-
+<p>明白了上面的两个点以后，现在我们来看这个问题：</p>
+<p>首先由于 A 和 C 中存在虚函数（虚指针）的缘故，他们的大小都是 16 字节。然后我们看到 B 中自己的成员变量，首先 short 一定是在 4 字节的，因为 short 本身是占 2 字节的，但是由于对齐规则 2 ，后续跟进的 int 的起始地址只能是 4 的倍数，所以 2 - 4 的空间也是只能给 short ，这样的话就是 16 + 16 + 16，最后还有一个 char 类型，不过因为对齐规则 1，这里只能是也占用 8 个字节，所有总共占用的字节数是 16 + 16 + 16 + 8 &#x3D; 56 个字节。</p>
 
                 
               </div>
@@ -323,7 +330,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" class="category-chain-item">算法题</a>
+  <a href="/categories/C-%E9%9D%A2%E7%BB%8F/" class="category-chain-item">C++ 面经</a>
   
   
 
@@ -343,8 +350,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hot 100 刷题记录</div>
-      <div>http://example.com/2025/01/13/Hot100 记录/</div>
+      <div>烤面筋 Day 03</div>
+      <div>http://example.com/2026/01/16/烤面筋_Day03/</div>
     </div>
     <div class="license-meta">
       
@@ -356,7 +363,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月13日</div>
+          <div>2026年1月16日</div>
         </div>
       
       
@@ -388,15 +395,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/07/NetWork/" title="NetWork">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NetWork</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2026/01/14/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day02/" title="烤面筋 Day 02">
+                        <span class="hidden-mobile">烤面筋 Day 02</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
