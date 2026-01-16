@@ -27,7 +27,7 @@
 <meta property="og:description" content="烤面筋 Day 03多态与虚函数表：1. 多态的定义是什么？分类有哪些？答：多态是允许基类的指针或引用在运行时根据实际指向的子类对象类型，调用相应子类重写方法的能力。主要分为两类。  静态多态（编译时多态）：通过函数重载和模板实现。编译器在编译期间就确定了调用的函数版本。  动态多态（运行时多态）：通过虚函数（Virtual Function）和继承来时实现。程序在运行期间根据对象的实际类型来决定">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-15T16:08:37.654Z">
-<meta property="article:modified_time" content="2026-01-16T08:11:35.527Z">
+<meta property="article:modified_time" content="2026-01-16T08:32:54.230Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -300,16 +300,18 @@
 <p>答：首先两个基础，创建一个 B 对象，这个对象的内存分布是怎么样的。构造一个派生类对象，它的内存布局里面肯定存在<strong>基类的子对象</strong>（以及其虚指针），如下图所示：</p>
 <p>![image-20251029202359749](E:\Document\Garbage\Typora Files\image-20251029202359749-1768492539172-1.png)</p>
 <p>图中的 <code>vptr</code>分别指向自己类的虚函数表，通常一个类的虚指针放在内存布局的最前面，所以这里 B 的虚指针一般会把 A 的虚指针给覆盖掉。</p>
-<p><strong>构造</strong>一个子类对象：首先会先去构建基类的对象内容，比如这里的 A 和 C，然后再构造自己的内容。</p>
-<p><strong>析构</strong>一个子类对象：和构造相反，先执行自己的析构函数，然后去执行基类的析构函数。</p>
-<hr>
-<p>那这里有个问题，如果 A 的析构函数是虚函数的话，之前覆盖了 A 的虚指针，这里就找不到 A 的虚函数表，那么如何析构 A 的内容呢？</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">构造一个子类对象：首先会先去构建基类的对象内容，比如这里的 <span class="hljs-selector-tag">A</span> 和 C，然后再构造自己的内容。<br>析构一个子类对象：和构造相反，先执行自己的析构函数，然后去执行基类的析构函数。<br></code></pre></td></tr></table></figure>
+
+<p>Question: 那这里有个问题，如果 A 的析构函数是虚函数的话，之前覆盖了 A 的虚指针，这里就找不到 A 的虚函数表，那么如何析构 A 的内容呢？</p>
 <p>答案就是编译器会在调用 B 的虚析构函数的时候，就把头部的虚指针重置为 A 的了，所以能够正常执行。</p>
-<hr>
 <p>所以这里我们就明白了解决上面问题最重要的一个点，那就是 B 的内存空间一定会继承基类的虚指针以及基类的一些成员变量。</p>
 <p>那么解决这个问题还需要明白一个知识点，那就是内存对齐。内存对齐的规则是什么呢？</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 类的每个基准内存块大小 = 类当中占用内存大小最大的成员变量的内存空间，比如这里的 A，虽然最大的成员变量是 <span class="hljs-number">1</span> 字节，但是它存在虚函数，所以内部有虚指针。又由于虚指针是 <span class="hljs-number">8</span> 字节，所以基准内存块大小就是 <span class="hljs-number">8</span> 字节，所以这里 A 所占用是 <span class="hljs-number">8</span> + <span class="hljs-number">8</span> = <span class="hljs-number">16</span> 字节<br><span class="hljs-number">2.</span> 每个类型的起始地址都是该类型大小的整数倍，比如 <span class="hljs-type">int</span> 的成员变量，那么它的起始地址只有可能是 <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>, ....<br></code></pre></td></tr></table></figure>
-
+<ol>
+<li><p>类的每个基准内存块大小 &#x3D; 类当中占用内存大小最大的成员变量的内存空间，比如这里的 A，虽然最大的成员变量是 1 字节，但是它存在虚函数，所以内部有虚指针。又由于虚指针是 8 字节，所以基准内存块大小就是 8 字节，所以这里 A 所占用是 8 + 8 &#x3D; 16 字节</p>
+</li>
+<li><p>每个类型的起始地址都是该类型大小的整数倍，比如 int 的成员变量，那么它的起始地址只有可能是 0, 4, 8, ….</p>
+</li>
+</ol>
 <p>明白了上面的两个点以后，现在我们来看这个问题：</p>
 <p>首先由于 A 和 C 中存在虚函数（虚指针）的缘故，他们的大小都是 16 字节。然后我们看到 B 中自己的成员变量，首先 short 一定是在 4 字节的，因为 short 本身是占 2 字节的，但是由于对齐规则 2 ，后续跟进的 int 的起始地址只能是 4 的倍数，所以 2 - 4 的空间也是只能给 short ，这样的话就是 16 + 16 + 16，最后还有一个 char 类型，不过因为对齐规则 1，这里只能是也占用 8 个字节，所有总共占用的字节数是 16 + 16 + 16 + 8 &#x3D; 56 个字节。</p>
 <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><h3 id="1-用过哪些智能指针？"><a href="#1-用过哪些智能指针？" class="headerlink" title="1. 用过哪些智能指针？"></a>1. 用过哪些智能指针？</h3><p>主要使用 C++ 11 引入的三种智能指针：</p>
