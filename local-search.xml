@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2026/01/28/Qt%20%E4%B8%AD%20Json%20%E7%9A%84%E5%A4%84%E7%90%86/"/>
+    <url>/2026/01/28/Qt%20%E4%B8%AD%20Json%20%E7%9A%84%E5%A4%84%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Qt-中-Json-的处理"><a href="#Qt-中-Json-的处理" class="headerlink" title="Qt 中 Json 的处理"></a>Qt 中 Json 的处理</h1><p>核心流程可以概括为：</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">内存对象（QJsonObject）⇌ <span class="hljs-type">Json</span> 文档（QJsonDocument）⇌ 字节数组（QByteArray）⇌ 文件/网络<br></code></pre></td></tr></table></figure><ol><li><h2 id="Json-存储过程："><a href="#Json-存储过程：" class="headerlink" title="Json 存储过程："></a><code>Json</code> 存储过程：</h2></li></ol><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> QJsonObject: 通过 insert 修改 QJsonObject 里面的键值对<br>    m_config.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>);<br>m_config.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;auto&quot;</span>, <span class="hljs-literal">true</span>);<br><span class="hljs-number">2.</span> QJSonDocument: 直接作为参数构造<br> <span class="hljs-function">QJsonDocument <span class="hljs-title">doc</span><span class="hljs-params">(m_config)</span></span><br><span class="hljs-function">3. QByteArray: 通过 toJson 将文档转换为 JSON 格式的字符串</span><br><span class="hljs-function">    QByteArray jsonData =</span> doc.<span class="hljs-built_in">toJson</span>();<br><span class="hljs-number">4.</span> 文件或者网络处理<br></code></pre></td></tr></table></figure><ol start="2"><li><h2 id="Json-提取过程："><a href="#Json-提取过程：" class="headerlink" title="Json 提取过程："></a><code>Json</code> 提取过程：</h2></li></ol><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 文件或者网络处理: 文件的话通过 readAll 来提取字符串<br>QByteArray data = file.<span class="hljs-built_in">readAll</span>();<br><span class="hljs-number">2.</span> QJsonDocument: 通过 fromJson 提取文档内容<br>    QJsonParseError error;<br> QJsonDocument doc = QJsonDocument::<span class="hljs-built_in">fromJson</span>(data, &amp;error);<br><span class="hljs-number">3.</span> QJsonObject: 通过 <span class="hljs-built_in">object</span>() 直接提取<br>    QJsonObject m_config = doc.<span class="hljs-built_in">object</span>();<br><span class="hljs-number">4.</span> 提取完毕<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Qt 框架</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网络通信协议</title>
     <link href="/2026/01/28/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
     <url>/2026/01/28/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/</url>
