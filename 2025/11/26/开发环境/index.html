@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="DxBlackSmith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="引用第三方库Windows 环境一般引用第三方库的时候，主要需要三个东西：  头文件（include）：包含库的函数声明，类定义等等 库文件（lib）：包含编译好的二进制代码 运行时库（dll）：动态链接库，静态链接库则不需要  为了得到这三个东西，一般的流程是： 获取项目源码这个一般直接从 github 直接拉下来就行，或者浏览器直接下载等等也行 12# 从 GitHub 克隆或下载源码git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="引用第三方库">
+<meta property="og:url" content="https://dxblacksmith.github.io/2025/11/26/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="引用第三方库Windows 环境一般引用第三方库的时候，主要需要三个东西：  头文件（include）：包含库的函数声明，类定义等等 库文件（lib）：包含编译好的二进制代码 运行时库（dll）：动态链接库，静态链接库则不需要  为了得到这三个东西，一般的流程是： 获取项目源码这个一般直接从 github 直接拉下来就行，或者浏览器直接下载等等也行 12# 从 GitHub 克隆或下载源码git">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-26T09:56:41.160Z">
+<meta property="article:modified_time" content="2026-01-29T09:19:27.507Z">
+<meta property="article:author" content="DxBlackSmith">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>引用第三方库 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dxblacksmith.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Xin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="引用第三方库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-26 17:56" pubdate>
+          2025年11月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">引用第三方库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="引用第三方库"><a href="#引用第三方库" class="headerlink" title="引用第三方库"></a>引用第三方库</h1><h2 id="Windows-环境"><a href="#Windows-环境" class="headerlink" title="Windows 环境"></a>Windows 环境</h2><p>一般引用第三方库的时候，主要需要三个东西：</p>
+<ol>
+<li>头文件（include）：包含库的函数声明，类定义等等</li>
+<li>库文件（lib）：包含编译好的二进制代码</li>
+<li>运行时库（dll）：动态链接库，静态链接库则不需要</li>
+</ol>
+<p>为了得到这三个东西，一般的流程是：</p>
+<h3 id="获取项目源码"><a href="#获取项目源码" class="headerlink" title="获取项目源码"></a>获取项目源码</h3><p>这个一般直接从 github 直接拉下来就行，或者浏览器直接下载等等也行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 从 GitHub 克隆或下载源码</span><br>git <span class="hljs-built_in">clone</span> https://github.com/grpc/grpc<br></code></pre></td></tr></table></figure>
+
+<h3 id="CMake-配置和生成"><a href="#CMake-配置和生成" class="headerlink" title="CMake  配置和生成"></a>CMake  配置和生成</h3><p>注意：<code>cmake</code>的配置和生成阶段<strong>不涉及</strong>编译。目的是生成构建系统所需要的文件（如 <code>.sln</code>和 <code>Makefile</code>文件）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> configure: 解析 CMakeLists.txt 中的配置选项，设置项目变量和缓存，检查依赖关系<br><span class="hljs-number">2.</span> generate: 生成构建系统所需要的文件（如 .sln 和 .vcxproj 项目文件）<br></code></pre></td></tr></table></figure>
+
+<p>所以 <code>CMake</code>不是编译器，它只是一个跨平台的<strong>构建工具</strong></p>
+<h3 id="编译第三方库"><a href="#编译第三方库" class="headerlink" title="编译第三方库"></a>编译第三方库</h3><p>这一步在 <code>windows</code>通常用 <code>msvc</code>来完成，将源代码编译成二进制文件（如果是可执行项目，可以直接生成 .exe，第三方库就是 .lib 和 .dll 文件 。换句话说 .lib 文件 &#x2F; .dll 文件 &#x2F; .exe 文件都是二进制文件）</p>
+<ol>
+<li>选择配置（Debug&#x2F;Release）</li>
+<li>编译源代码，生成 .obj 文件</li>
+<li>链接 .obj 文件 -&gt; 生成最终的 .lib 或者 .dll 文件（可执行项目就是 .exe 文件）</li>
+</ol>
+<p>Ps. 点击生成之前需要进行一个<strong>配置</strong>，很重要，很多项目不兼容就是因为这个原因。项目中的所有库必须使用<strong>相同的运行时库类型(runtime-link)</strong>！</p>
+<p>这一步就是在配置运行时库的一个类型（属性 -&gt; C&#x2F;C++ -&gt; 代码生成 -&gt; 运行库）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> <span class="hljs-built_in">MT</span>(Release): 静态链接多线程运行时库<br><span class="hljs-number">2.</span> <span class="hljs-built_in">MD</span>(Release): 动态链接多线程运行时库<br><span class="hljs-number">3.</span> <span class="hljs-built_in">MTd</span>(Debug):  静态链接多线程调试运行时库<br><span class="hljs-number">4.</span> <span class="hljs-built_in">MDd</span>(Debug):  动态链接多线程调试运行时库<br></code></pre></td></tr></table></figure>
+
+<p>上面这么多类型其实不用记，只需要记住如果有一个项目选择的是 <code>shared</code>方式，其余所有的项目都需要选择 <strong>MD</strong>。</p>
+<h3 id="配置第三方库"><a href="#配置第三方库" class="headerlink" title="配置第三方库"></a>配置第三方库</h3><p>在上一步库的编译以后，会得到第三方库的目录</p>
+<ol>
+<li>include:  头文件目录</li>
+<li>lib：库文件目录（grpc.dll, grpc.lib）</li>
+</ol>
+<p>或者可执行文件目录  bin，然后接下来就是比较重要的配置第三方库：</p>
+<ol>
+<li>包含目录（属性 -&gt; VC++ 目录 -&gt; 包含目录）输入第三方库 <code>include</code> 文件夹的路径</li>
+<li>库目录（属性-&gt;VC++目录-&gt;库目录）输入第三方库 <code>lib</code> 文件夹的路径</li>
+<li>运行时库（属性-&gt;链接器-&gt;输入-&gt;附加依赖项）输入 <code>lib</code> 文件夹下具体 lib&#x2F;dll 文件的全称（有些库比如<code>boost</code>库不需要）</li>
+</ol>
+<h2 id="Linux-环境"><a href="#Linux-环境" class="headerlink" title="Linux 环境"></a>Linux 环境</h2><h3 id="1-vscode-clangd-conan配置开源项目"><a href="#1-vscode-clangd-conan配置开源项目" class="headerlink" title="1.  vscode + clangd + conan配置开源项目"></a>1.  <code>vscode + clangd + conan</code>配置开源项目</h3><ul>
+<li>配置开源项目</li>
+</ul>
+<p>a. 项目中一般有 <code>conanfile.txt</code>，所以第一步就直接安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conan install . --build=missing -s build_type=Release<br></code></pre></td></tr></table></figure>
+
+<p>b. 为了让 clangd 正常工作，这里要首先 CMake 生成 <code>compile_commands.json</code>（作者一般写好了，直接构建就行）</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmake">cmake \<br>  -DCMAKE_TOOLCHAIN_FILE=build/Release/generators/conan_toolchain.cmake \<br>  -DCMAKE_BUILD_TYPE=Release \<br>  -S . \<br>  -B build \<br>  -G Ninja<br></code></pre></td></tr></table></figure>
+
+<p>c. 创建软链接，让 <code>clangd</code>自动发现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -sf build/compile_commands.json ./<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>重新配置项目环境</li>
+</ul>
+<p>a. 写 <code>conanfile.txt</code>，因为这里一般是复现，可以直接把作者的该文件抄过来</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix">[requires]<br>fmt<span class="hljs-symbol">/11.1.3</span><br>spdlog<span class="hljs-symbol">/1.15.1</span><br>cpp-httplib<span class="hljs-symbol">/0.20.1</span><br>nlohmann_json<span class="hljs-symbol">/3.12.0</span><br>gflags<span class="hljs-symbol">/2.2.2</span><br><br>[generators]<br>CMakeDeps<br>CMakeToolchain<br><br>[layout]<br>cmake_layout<br></code></pre></td></tr></table></figure>
+
+<p>b. 重新检测缓存环境，于项目根目录下生成第三方库的配置环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conan install . --build=missing -s build_type=Release<br></code></pre></td></tr></table></figure>
+
+<p>c.写 <code>CMakeLists</code>来构建 <code>compile_commands.json</code>文件，注意一定要<strong>导出编译数据库</strong>，<strong>查找依赖</strong>和<strong>链接库</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># CMakeLists.txt - 最小可工作版本</span><br><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)<br><span class="hljs-keyword">project</span>(Demo LANGUAGES CXX)<br><br><span class="hljs-comment"># ✅ 关键：导出编译数据库（让 clangd 可用）</span><br><span class="hljs-keyword">set</span>(CMAKE_EXPORT_COMPILE_COMMANDS <span class="hljs-keyword">ON</span>)<br><br><span class="hljs-comment"># 设置 C++ 标准</span><br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD <span class="hljs-number">17</span>)<br><span class="hljs-keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="hljs-keyword">ON</span>)<br><br><span class="hljs-comment"># 查找 Conan 安装的依赖</span><br><span class="hljs-keyword">find_package</span>(fmt CONFIG REQUIRED)<br><span class="hljs-keyword">find_package</span>(spdlog CONFIG REQUIRED)<br><span class="hljs-keyword">find_package</span>(httplib CONFIG REQUIRED)<br><span class="hljs-keyword">find_package</span>(nlohmann_json CONFIG REQUIRED)<br><span class="hljs-keyword">find_package</span>(gflags CONFIG REQUIRED)<br><br><span class="hljs-comment"># 添加一个空的可执行文件（只是为了触发编译和生成 compile_commands.json）</span><br><span class="hljs-keyword">add_executable</span>(demo main.cpp)<br><br><span class="hljs-comment"># 链接你关心的库（告诉 CMake：“我要用这些头文件和库”）</span><br><span class="hljs-keyword">target_link_libraries</span>(demo PRIVATE<br>    fmt::fmt<br>    spdlog::spdlog<br>    httplib::httplib<br>    nlohmann_json::nlohmann_json<br>    gflags::gflags<br>)<br></code></pre></td></tr></table></figure>
+
+<p>d. 执行 CMake 并将生成的 <code>compile_commands.json</code>软链接到项目根目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">cmake \<br>  -DCMAKE_TOOLCHAIN_FILE=build/Release/generators/conan_toolchain.cmake \<br>  -DCMAKE_BUILD_TYPE=Release \<br>  -S . \<br>  -B build \<br>  -G Ninja<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -sf build/compile_commands.json ./<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-vs2022-ssh-配置开源项目（前提是项目是存在本地的）"><a href="#2-vs2022-ssh-配置开源项目（前提是项目是存在本地的）" class="headerlink" title="2.  vs2022 + ssh 配置开源项目（前提是项目是存在本地的）"></a>2.  <code>vs2022 + ssh</code> 配置开源项目（前提是项目是存在本地的）</h3><p>a. 通过 ssh 连接到远程系统</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 主机名一般填 <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> (wsl)，其它看情况<br><span class="hljs-number">2.</span> 端口名一般就是 <span class="hljs-number">22</span><br><span class="hljs-number">3.</span> 用户名最好填 root，免得出现权限问题<br><span class="hljs-number">4.</span> 密码就是 sudo passwd root 的密码<br></code></pre></td></tr></table></figure>
+
+<p>b. 指定运行的计算机</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 项目属性 -&gt; 常规 -&gt; 远程生成计算机<br><span class="hljs-number">2.</span> 同时下面可以指定远程生成代码的根目录    <br></code></pre></td></tr></table></figure>
+
+<p>c. 指定调试的绝对路径</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 项目属性 -&gt; 调试 -&gt; 程序（写入绝对路径）<br>ps. 这里的绝对路径是指的远端程序的绝对路径，就是刚刚指定生成远程代码根目录下面，比如：<br>/root/projects/LinuxConsole/bin/x64/Debug/LinuxConsole.out    <br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/" class="category-chain-item">项目经验</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>引用第三方库</div>
+      <div>https://dxblacksmith.github.io/2025/11/26/开发环境/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>DxBlackSmith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/07/NetWork/" title="NetWork">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">NetWork</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/01/13/Hot100%20%E8%AE%B0%E5%BD%95/" title="Hot 100 刷题记录">
+                        <span class="hidden-mobile">Hot 100 刷题记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
