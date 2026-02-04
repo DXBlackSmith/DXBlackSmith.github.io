@@ -19,21 +19,21 @@
   <meta name="author" content="DxBlackSmith">
   <meta name="keywords" content="">
   
-    <meta name="description" content="“连网”平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 wifi 才能访问互联网上的各种资源呢？ 为了搞清楚这个问题，需要搞懂下面几个概念 连网：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。 主机网络通信的方法公网通信两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接 这种通常只适用于具有固定公网">
+    <meta name="description" content="JavaScript 基础一、Nodejs, Js, npm 的关系JavaScript 是一种动态、弱类型、解释型的脚本语言（基于 C++ 封装） Node.js 是基于 Chrome V8 引擎构建的 JavaScript Runtime，目的是能 js 在服务端上运行 npm（Node Package Manager) 是 Nodejs 的官方包管理工具，目的是管理第三方代码依赖 三者关系是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="连网">
-<meta property="og:url" content="https://dxblacksmith.github.io/2025/12/07/%E8%BF%9E%E7%BD%91/index.html">
+<meta property="og:title" content="Js（一）">
+<meta property="og:url" content="https://dxblacksmith.github.io/2026/02/04/Js/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="“连网”平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 wifi 才能访问互联网上的各种资源呢？ 为了搞清楚这个问题，需要搞懂下面几个概念 连网：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。 主机网络通信的方法公网通信两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接 这种通常只适用于具有固定公网">
+<meta property="og:description" content="JavaScript 基础一、Nodejs, Js, npm 的关系JavaScript 是一种动态、弱类型、解释型的脚本语言（基于 C++ 封装） Node.js 是基于 Chrome V8 引擎构建的 JavaScript Runtime，目的是能 js 在服务端上运行 npm（Node Package Manager) 是 Nodejs 的官方包管理工具，目的是管理第三方代码依赖 三者关系是">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-12-07T05:09:21.000Z">
-<meta property="article:modified_time" content="2026-02-04T09:02:50.797Z">
+<meta property="article:published_time" content="2026-02-04T11:44:35.813Z">
+<meta property="article:modified_time" content="2026-02-04T11:44:36.111Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>连网 - Hexo</title>
+  <title>Js（一） - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="连网"></span>
+            <span id="subtitle" data-typed-text="Js（一）"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-12-07 13:09" pubdate>
-          2025年12月7日 下午
+        <time datetime="2026-02-04 19:44" pubdate>
+          2026年2月4日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          758 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          14 分钟
+          7 分钟
         
       </span>
     
@@ -270,107 +270,51 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">连网</h1>
+            <h1 id="seo-header">Js（一）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="“连网”"><a href="#“连网”" class="headerlink" title="“连网”"></a>“连网”</h1><p>平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 <code>wifi</code> 才能访问互联网上的各种资源呢？</p>
-<p>为了搞清楚这个问题，需要搞懂下面几个概念</p>
-<p><strong>连网</strong>：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。</p>
-<h2 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h2><h3 id="公网通信"><a href="#公网通信" class="headerlink" title="公网通信"></a>公网通信</h3><p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
-<p>这种通常只适用于具有固定公网 IP 的设备连接。</p>
-<p>家庭的宽带通常是动态的公网 IP (重启光猫以后会变化)，企业或者云服务器才是静态公网 IP 。</p>
-<ul>
-<li>解释家里为什么只有连接 <code>wifi</code> （连接路由器）才能访问互联网上的各种资源。</li>
-</ul>
-<p>只要是需要访问互联网上的资源，那么都需要设备具有<strong>公网 IP</strong>， 但是手机等设备出厂时只有 <code>mac</code> 地址，连接路由器的才会给你分配 IP 地址（IP 地址是逻辑地址，由网络环境决定的），但是就算给你分配了，也只是<strong>内网 IP</strong>，路由器才是唯一具有公网 IP 的设备。</p>
-<p>不过连接的路由器会将你的内网 IP 结合自己的 WAN 口（公网 IP）转换成公网 IP，收到回复包的时候，又将这个公网 IP 转换成内网 IP 从而找到你的设备，这其中牵扯到的协议叫做 <strong>NAT 协议</strong>，这里先不仔细讲了，大概是实现了地址转换的意思。</p>
-<blockquote>
-<p>Ps. 用 <code>4G/5G</code> 是不经过家用路由器，直接通过基站连接到运营商的核心网，然后运营商给你分配 CGNAT IP&#x2F; 公网 IP 。</p>
-</blockquote>
-<h3 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h3><h4 id="同一局域网内通信"><a href="#同一局域网内通信" class="headerlink" title="同一局域网内通信"></a>同一局域网内通信</h4><p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
-<p>那么有些时候为了固定比如监控摄像头和打印机的 IP 或者实验室根本就没有路由器（纯内网通信），这个时候作为计算机专业的我们，可能会让我们配置静态 IP。</p>
-<p>于是就会接触下面的概念：</p>
-<ol>
-<li>子网掩码：用于划分网络地址和主机地址。同一局域网的所有 IP &amp; 上这个掩码都会得到同一个地址（一般就填 255.255.255.0 ）</li>
-<li>默认网关：当访问不是局域网的地址的时候，数据包就会发给网关。通常是路由器的内网 IP ，大多数默认网关的 IP 地址的最后一位是 1 或者 254（0 不可以，255 用作广播）</li>
-<li>DNS 服务器：用于将输入的域名解析成 IP 地址，比较方便。DNS 服务器通常填 114.114.114.114 这种公共 DNS 服务器即可</li>
-</ol>
-<p>在纯内网通信（实验室中常用）当中，交换机由于没有 <code>DHCP</code> 服务器，就没有自动分配 IP 的功能（路由器有），所以这个时候只能通过手动配置 IP 的方式来实现通信。</p>
-<p>这个时候只需要所有的机器都在同一个网段，比如</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">IP: 不冲突就行<br>	机器 A : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.10</span> <br>	机器 B : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span><br>	机器 B : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.12</span>  <br>子网掩码：<br>    统一填 <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>     <br>默认网关:<br>	一般留空（<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>)，因为一般不需要上网<br>DNS：<br>    一般也留空，除非你要解析域名，但是一般内网用 IP 地址<br></code></pre></td></tr></table></figure>
+                <h1 id="JavaScript-基础"><a href="#JavaScript-基础" class="headerlink" title="JavaScript 基础"></a>JavaScript 基础</h1><h2 id="一、Nodejs-Js-npm-的关系"><a href="#一、Nodejs-Js-npm-的关系" class="headerlink" title="一、Nodejs, Js, npm 的关系"></a>一、Nodejs, Js, npm 的关系</h2><p>JavaScript 是一种动态、弱类型、解释型的脚本语言（基于 C++ 封装）</p>
+<p>Node.js 是基于 Chrome V8 引擎构建的 JavaScript Runtime，目的是能 js 在服务端上运行</p>
+<p>npm（Node Package Manager) 是 Nodejs 的官方包管理工具，目的是管理第三方代码依赖</p>
+<p>三者关系是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">JavaScript（语言）<br>     ↑<br>Node.js（运行环境：提供 fs/http/crypto 等 API + V8 引擎）<br>     ↑<br>npm（包管理器：安装/发布/管理 JS 库）<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>如何配置一个新设备的静态 IP</li>
-</ul>
+<h2 id="二、隔离不同项目依赖"><a href="#二、隔离不同项目依赖" class="headerlink" title="二、隔离不同项目依赖"></a>二、隔离不同项目依赖</h2><p>不像 python 有 venv, Js 是通过本地 <code>node_modules</code> + 锁定文件来实现逻辑上的隔离</p>
+<h3 id="每个项目有自己的-node-modules-目录"><a href="#每个项目有自己的-node-modules-目录" class="headerlink" title="每个项目有自己的 node_modules 目录"></a>每个项目有自己的 <code>node_modules</code> 目录</h3><p>比如执行 <code>npm install ioredis</code> 的时候，包会被安装到当前项目目录下的 <code>./node_modules</code>。</p>
+<p>不同项目的 <code>node_modules</code> 互不影响</p>
+<h3 id="依赖解析规则（"><a href="#依赖解析规则（" class="headerlink" title="依赖解析规则（"></a>依赖解析规则（</h3><p>当代码中写 <code>const Redis = require(&#39;ioredis&#39;)</code> 的时候，Node.js 会：</p>
 <ol>
-<li>记录同网段下另一台配置好得设备的网段 （IP + 子网掩码 192.168.31.0&#x2F;24）和默认网关（ 192.168.31.1）</li>
-<li>选择一个不冲突的静态 IP（ping 一下看看连不连通），登录设备的管理界面，这个一般根据设备的不同有些许不同，可以查看下表：</li>
+<li>优先在 <strong>当前项目 <code>node_modules</code></strong> 中找；</li>
+<li>如果没有，逐级向上查找父目录的 <code>node_modules</code>，直到根目录；</li>
+<li><strong>不会自动使用全局安装的包</strong>（除非显式指定）。</li>
 </ol>
-<table>
-<thead>
-<tr>
-<th>设备类型</th>
-<th>登录方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>打印机</td>
-<td>1. 在打印机面板上查看 IP 2. 用浏览器访问该 IP 3. 输入管理员账号密码（默认常印在机身）</td>
-</tr>
-<tr>
-<td>交换机（网管型）</td>
-<td>1. 用 Console 线（串口）连接电脑 2. 用终端软件（PuTTY、SecureCRT）登录</td>
-</tr>
-<tr>
-<td><strong>摄像头 &#x2F; NAS</strong></td>
-<td>浏览器访问 IP 或专用客户端</td>
-</tr>
-<tr>
-<td>Linux 服务器</td>
-<td>SSH 登录后修改网络配置文件</td>
-</tr>
-</tbody></table>
-<ol start="3">
-<li>配置 IP 参数（一般内网就配置 IP 地址和子网掩码就可以）同时保存验证，比如用新 IP 能够重新访问设备的管理界面和用其他设备 ping 一下这个设备来测试连通。</li>
-</ol>
-<hr>
-<h4 id="不同局域网之间通信"><a href="#不同局域网之间通信" class="headerlink" title="不同局域网之间通信"></a>不同局域网之间通信</h4><ul>
-<li><h4 id="通过跳板机中转"><a href="#通过跳板机中转" class="headerlink" title="通过跳板机中转"></a>通过跳板机中转</h4></li>
-</ul>
-<p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
-<p>比如公司的数据库服务器，或者内部的 API 服务部署在私有网络中，处于安全考虑不允许直接暴露到互联网中。所以他们<strong>没有公网 IP</strong>，同时又不可能和你在一个<strong>局域网</strong>内，这个时候就需要先登录一台有公网 IP 的跳板机，再从它跳转过去。</p>
-<p>这样目标服务器就实现了完全隔离，其防火墙只允许跳板机 IP 访问 SSH 端口。</p>
-<ul>
-<li>那么我们如何能够通过跳板机来连接目标服务器呢？</li>
-</ul>
-<p>最推荐的就是直接编辑<strong>本地电脑</strong>的 SSH 配置文件（~&#x2F;.ssh&#x2F;config 文件）。假如我们有如下信息</p>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>信息</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>跳板机</td>
-<td>公网 IP: <code>203.0.113.10</code>，用户名: <code>abc</code>，SSH 端口: <code>22</code></td>
-</tr>
-<tr>
-<td>目标服务器</td>
-<td>内网 IP: <code>10.0.1.20</code>，用户名: <code>cba</code></td>
-</tr>
-</tbody></table>
-<p>那么直接在配置文件中定义如下即可：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 跳板机定义</span><br>Host jump<br>  HostName <span class="hljs-number">203.0</span>.<span class="hljs-number">113.10</span><br>  <span class="hljs-keyword">User</span> <span class="hljs-title">ops</span><br>  Port <span class="hljs-number">22</span><br><br><span class="hljs-comment"># 目标服务器（通过跳板机访问）</span><br>Host db-server<br>  HostName <span class="hljs-number">10.0</span>.<span class="hljs-number">1.20</span><br>  <span class="hljs-keyword">User</span> <span class="hljs-title">app</span><br>  ProxyJump jump<br></code></pre></td></tr></table></figure>
+<h3 id="锁定依赖版本"><a href="#锁定依赖版本" class="headerlink" title="锁定依赖版本"></a>锁定依赖版本</h3><p><code>npm install</code> 下载生成的 <code>package-lock.json</code> 记录<strong>精确版本号 + 依赖树结构</strong>。</p>
+<p>团队成员执行 <code>npm ci</code> 可重建<strong>完全一致</strong>的 <code>node_modules</code>。</p>
+<h2 id="三、JavaScript-的内存管理"><a href="#三、JavaScript-的内存管理" class="headerlink" title="三、JavaScript 的内存管理"></a>三、JavaScript 的内存管理</h2><h3 id="内存分配机制"><a href="#内存分配机制" class="headerlink" title="内存分配机制"></a>内存分配机制</h3><p>Js 引擎在运行时<strong>自动推断值的类型</strong>，并为其分配合适内存：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> a = <span class="hljs-number">42</span>;        <span class="hljs-comment">// → 存为 32 位整数（Smis，V8 优化）</span><br>a = <span class="hljs-number">3.14</span>;          <span class="hljs-comment">// → 改为 64 位双精度浮点数（HeapNumber）</span><br>a = <span class="hljs-string">&quot;hello&quot;</span>;       <span class="hljs-comment">// → 分配字符串对象（在堆上）</span><br>a = &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">1</span> &#125;;      <span class="hljs-comment">// → 分配对象（在堆上）</span><br></code></pre></td></tr></table></figure>
 
-<p><code>vscode</code> 下载相应的插件以后读取这个配置，就能直接连接内部服务器，实现代码编辑和文件上传（vscode 内置的 SFTP ）。也有人用 xftp 或者 Filezilla 来实现文件传输，我没用过，所以暂时不评论。</p>
-<p>Ps. <code>vscode</code> 具体操作就是调出命令面板，remote-ssh: connet to host。</p>
-<ul>
-<li><h4 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h4></li>
-</ul>
-<p>这个暂时没有接触到，先挖个坑。。。</p>
+<p>其中基本类型（number, string, boolean, symbol）小整数或短字符串可能直接内联存储（栈或对象内），大值存在堆上</p>
+<p>引用类型（Object, Array, Function) 总是分配在堆上，</p>
+<h3 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h3><p>Js 的内存管理机制是自动垃圾回收（GC），C++ 现在则是利用 RAII 思想来析构对象，可以直接用智能指针来管理对象</p>
+<p>后现代语言通常采用 GC 机制回收变量，当创建的对象不再被使用的时候就会变成 “垃圾”，被 GC 自动回收。</p>
+<p><strong>识别</strong>核心也是：</p>
+<ol>
+<li>引用计数（存在循环引用问题）：每个对象有计数器，被引用一次，计数就 + 1，引用消失，计数就 -1，为 0 时就被回收</li>
+<li>可达性分析：从 “根对象”(全局变量，栈变量，当前执行上下文)开始遍历，能遍历到的 &#x3D; 活着，遍历不到 &#x3D; 垃圾</li>
+</ol>
+<p><strong>回收</strong>核心则是：</p>
+<ol>
+<li>分代回收（Java&#x2F;JS v8 核心）：把对象分为 ”新对象“&#x2F;”老对象“，其中新生代对象死得快，GC 频繁，老生代对象活得久，GC 少（效率高）</li>
+<li>Mark-Sweep：先标记所有可达对象，再清除未标记的垃圾</li>
+<li>Mark-Compact：标记 → 把存活对象往一边挤 → 清除剩下的垃圾，这样能够解决碎片问题</li>
+</ol>
+<p>GC 的<strong>缺点</strong>很明显：</p>
+<ol>
+<li>GC 工作时，会有停顿（STW），影响系统性能</li>
+<li>GC 本身会有开销，占 CPU，内存</li>
+</ol>
 
                 
               </div>
@@ -389,7 +333,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
   
   
 
@@ -409,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>连网</div>
-      <div>https://dxblacksmith.github.io/2025/12/07/连网/</div>
+      <div>Js（一）</div>
+      <div>https://dxblacksmith.github.io/2026/02/04/Js/</div>
     </div>
     <div class="license-meta">
       
@@ -422,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年12月7日</div>
+          <div>2026年2月4日</div>
         </div>
       
       
@@ -454,9 +398,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/13/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day01/" title="烤面筋 Day 01">
+                      <a href="/2026/02/04/JDBC/" title="JDBC">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">烤面筋 Day 01</span>
+                        <span class="hidden-mobile">JDBC</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -464,8 +408,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/26/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="引用第三方库">
-                        <span class="hidden-mobile">引用第三方库</span>
+                      <a href="/2026/02/03/%E6%B1%A0%E5%8C%96/" title="池化">
+                        <span class="hidden-mobile">池化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

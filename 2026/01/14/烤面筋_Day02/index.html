@@ -27,7 +27,7 @@
 <meta property="og:description" content="烤面筋 Day 02 类型转换1. 向上转型 vs 向下转型?这是多态中两个方向完全相反的操作： 向上转型：  定义：将子类的指针或引用转换成父类 安全性：绝对安全。因为子类也是一种父类 用法：这种转换是隐式，不需要显式调用 static_cast ，是实现多态的基础  向下转型：  定义：将父类的指针或引用转换为子类。 安全性： 不安全。父类对象不一定是子类。 用法：必须使用显式转换，出于安全保">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-14T07:13:34.486Z">
-<meta property="article:modified_time" content="2026-01-15T09:16:59.819Z">
+<meta property="article:modified_time" content="2026-02-02T06:10:29.246Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2k 字
         
       </span>
     
@@ -332,6 +332,7 @@
 <li><p>解耦计算：<strong>线程池</strong> 将业务计算逻辑从 I&#x2F;O 线程中剥离。如果业务逻辑耗时较长，它不会阻塞 I&#x2F;O 事件的分发，从而极大提高了系统的吞吐量。</p>
 </li>
 </ul>
+<p><code>accept()</code> 仅需内核拷贝 socket 描述符（<strong>轻量高频操作</strong>），单线程 <code>BossGroup</code> 足以应对万级连接请求。如果是多线程竞争锁，反而会降低效率。IO 事件是重量级操作，涉及数据读写，业务逻辑，可能阻塞（数据库查询）。WorkGroup 多线程并行处理，充分利用多核 CPU。</p>
 <p>Ps. 这里的 I&#x2F;O 线程处理的是 I&#x2F;O 读写，指的是从<strong>网卡驱动缓存</strong>拷贝到用户缓存区，或者将用户态数据拷贝到<strong>内核发送缓存区</strong>。业务计算逻辑则是加工数据（数据读上来以后，程序需要处理它），例如协议解析（二进制流解包成 Protobuf 或 JSON），数据库查询（根据请求差 SQL）等等</p>
 <h3 id="3-从-Reactor-读到的数据如何传递给线程池？能不能实现一下？"><a href="#3-从-Reactor-读到的数据如何传递给线程池？能不能实现一下？" class="headerlink" title="3. 从 Reactor 读到的数据如何传递给线程池？能不能实现一下？"></a>3. 从 Reactor 读到的数据如何传递给线程池？能不能实现一下？</h3><p>是通过任务队列来实现的。Sub Reactor 将 （数据，处理函数）封装成任务丢进队列，线程池里的 worker 线程通过竞争来获取任务。</p>
 <p>线程安全的任务队列通常有使用条件变量的阻塞队列和无锁队列。</p>

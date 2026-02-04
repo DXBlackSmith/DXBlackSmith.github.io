@@ -19,21 +19,21 @@
   <meta name="author" content="DxBlackSmith">
   <meta name="keywords" content="">
   
-    <meta name="description" content="“连网”平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 wifi 才能访问互联网上的各种资源呢？ 为了搞清楚这个问题，需要搞懂下面几个概念 连网：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。 主机网络通信的方法公网通信两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接 这种通常只适用于具有固定公网">
+    <meta name="description" content="Java 分层架构一、Controller&#x2F; Service &#x2F; Dao 这是现代企业级应用（尤其是 Java Web 应用）中常见的 分层架构模式，目的是解耦、提高可维护性和可测试性。  整体的架构图如下所示： 123456789[客户端]    ↓ (HTTP 请求)@Controller（控制器）   ↓ 调用@Service（业务逻辑层）   ↓ 调用@Mapper &#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="连网">
-<meta property="og:url" content="https://dxblacksmith.github.io/2025/12/07/%E8%BF%9E%E7%BD%91/index.html">
+<meta property="og:title" content="Java 分层架构">
+<meta property="og:url" content="https://dxblacksmith.github.io/2026/02/04/Java-%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="“连网”平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 wifi 才能访问互联网上的各种资源呢？ 为了搞清楚这个问题，需要搞懂下面几个概念 连网：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。 主机网络通信的方法公网通信两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接 这种通常只适用于具有固定公网">
+<meta property="og:description" content="Java 分层架构一、Controller&#x2F; Service &#x2F; Dao 这是现代企业级应用（尤其是 Java Web 应用）中常见的 分层架构模式，目的是解耦、提高可维护性和可测试性。  整体的架构图如下所示： 123456789[客户端]    ↓ (HTTP 请求)@Controller（控制器）   ↓ 调用@Service（业务逻辑层）   ↓ 调用@Mapper &#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-12-07T05:09:21.000Z">
-<meta property="article:modified_time" content="2026-02-04T09:02:50.797Z">
+<meta property="article:published_time" content="2026-02-04T14:13:31.798Z">
+<meta property="article:modified_time" content="2026-02-04T14:13:32.194Z">
 <meta property="article:author" content="DxBlackSmith">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>连网 - Hexo</title>
+  <title>Java 分层架构 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="连网"></span>
+            <span id="subtitle" data-typed-text="Java 分层架构"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-12-07 13:09" pubdate>
-          2025年12月7日 下午
+        <time datetime="2026-02-04 22:13" pubdate>
+          2026年2月4日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          462 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          14 分钟
+          4 分钟
         
       </span>
     
@@ -270,107 +270,59 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">连网</h1>
+            <h1 id="seo-header">Java 分层架构</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="“连网”"><a href="#“连网”" class="headerlink" title="“连网”"></a>“连网”</h1><p>平时我们说的连网，连网到底是什么呢？为什么实验室的主机只能接网线或者连接 <code>wifi</code> 才能访问互联网上的各种资源呢？</p>
-<p>为了搞清楚这个问题，需要搞懂下面几个概念</p>
-<p><strong>连网</strong>：主机通过有线或无线方式接入网络，获得 IP 地址，并能够与其他设备或互联网进行数据通信的过程。</p>
-<h2 id="主机网络通信的方法"><a href="#主机网络通信的方法" class="headerlink" title="主机网络通信的方法"></a>主机网络通信的方法</h2><h3 id="公网通信"><a href="#公网通信" class="headerlink" title="公网通信"></a>公网通信</h3><p>两台主机都有公网 IP, 可以直接通过 ssh user@公网 IP 连接</p>
-<p>这种通常只适用于具有固定公网 IP 的设备连接。</p>
-<p>家庭的宽带通常是动态的公网 IP (重启光猫以后会变化)，企业或者云服务器才是静态公网 IP 。</p>
-<ul>
-<li>解释家里为什么只有连接 <code>wifi</code> （连接路由器）才能访问互联网上的各种资源。</li>
-</ul>
-<p>只要是需要访问互联网上的资源，那么都需要设备具有<strong>公网 IP</strong>， 但是手机等设备出厂时只有 <code>mac</code> 地址，连接路由器的才会给你分配 IP 地址（IP 地址是逻辑地址，由网络环境决定的），但是就算给你分配了，也只是<strong>内网 IP</strong>，路由器才是唯一具有公网 IP 的设备。</p>
-<p>不过连接的路由器会将你的内网 IP 结合自己的 WAN 口（公网 IP）转换成公网 IP，收到回复包的时候，又将这个公网 IP 转换成内网 IP 从而找到你的设备，这其中牵扯到的协议叫做 <strong>NAT 协议</strong>，这里先不仔细讲了，大概是实现了地址转换的意思。</p>
-<blockquote>
-<p>Ps. 用 <code>4G/5G</code> 是不经过家用路由器，直接通过基站连接到运营商的核心网，然后运营商给你分配 CGNAT IP&#x2F; 公网 IP 。</p>
+                <h1 id="Java-分层架构"><a href="#Java-分层架构" class="headerlink" title="Java 分层架构"></a>Java 分层架构</h1><h2 id="一、Controller-Service-Dao"><a href="#一、Controller-Service-Dao" class="headerlink" title="一、Controller&#x2F; Service &#x2F; Dao"></a>一、Controller&#x2F; Service &#x2F; Dao</h2><blockquote>
+<p>这是现代企业级应用（尤其是 Java Web 应用）中常见的 <strong>分层架构模式</strong>，目的是解耦、提高可维护性和可测试性。</p>
 </blockquote>
-<h3 id="局域网通信"><a href="#局域网通信" class="headerlink" title="局域网通信"></a>局域网通信</h3><h4 id="同一局域网内通信"><a href="#同一局域网内通信" class="headerlink" title="同一局域网内通信"></a>同一局域网内通信</h4><p>在同一局域网下面，通过局域网的 IP 能够直接进行通信。这个用的比较多，一般公司&#x2F;学校&#x2F;实验室内部服务器都是通过这种方式。</p>
-<p>那么有些时候为了固定比如监控摄像头和打印机的 IP 或者实验室根本就没有路由器（纯内网通信），这个时候作为计算机专业的我们，可能会让我们配置静态 IP。</p>
-<p>于是就会接触下面的概念：</p>
-<ol>
-<li>子网掩码：用于划分网络地址和主机地址。同一局域网的所有 IP &amp; 上这个掩码都会得到同一个地址（一般就填 255.255.255.0 ）</li>
-<li>默认网关：当访问不是局域网的地址的时候，数据包就会发给网关。通常是路由器的内网 IP ，大多数默认网关的 IP 地址的最后一位是 1 或者 254（0 不可以，255 用作广播）</li>
-<li>DNS 服务器：用于将输入的域名解析成 IP 地址，比较方便。DNS 服务器通常填 114.114.114.114 这种公共 DNS 服务器即可</li>
-</ol>
-<p>在纯内网通信（实验室中常用）当中，交换机由于没有 <code>DHCP</code> 服务器，就没有自动分配 IP 的功能（路由器有），所以这个时候只能通过手动配置 IP 的方式来实现通信。</p>
-<p>这个时候只需要所有的机器都在同一个网段，比如</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">IP: 不冲突就行<br>	机器 A : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.10</span> <br>	机器 B : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span><br>	机器 B : <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.12</span>  <br>子网掩码：<br>    统一填 <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>     <br>默认网关:<br>	一般留空（<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>)，因为一般不需要上网<br>DNS：<br>    一般也留空，除非你要解析域名，但是一般内网用 IP 地址<br></code></pre></td></tr></table></figure>
+<p>整体的架构图如下所示：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-selector-attr">[客户端]</span> <br>   ↓ (HTTP 请求)<br><span class="hljs-keyword">@Controller</span>（控制器）<br>   ↓ 调用<br><span class="hljs-keyword">@Service</span>（业务逻辑层）<br>   ↓ 调用<br><span class="hljs-keyword">@Mapper</span> / <span class="hljs-keyword">@Repository</span>（数据访问层，即 DAO）<br>   ↓<br>[数据库]<br></code></pre></td></tr></table></figure>
 
+<h3 id="1-DAO（Data-Access-Object）——-数据访问层"><a href="#1-DAO（Data-Access-Object）——-数据访问层" class="headerlink" title="1. DAO（Data Access Object）—— 数据访问层"></a>1. DAO（Data Access Object）—— 数据访问层</h3><p>职责：</p>
 <ul>
-<li>如何配置一个新设备的静态 IP</li>
+<li>封装对数据库的 CRUD 操作</li>
+<li>只负责数据存取，不包含业务逻辑。</li>
 </ul>
-<ol>
-<li>记录同网段下另一台配置好得设备的网段 （IP + 子网掩码 192.168.31.0&#x2F;24）和默认网关（ 192.168.31.1）</li>
-<li>选择一个不冲突的静态 IP（ping 一下看看连不连通），登录设备的管理界面，这个一般根据设备的不同有些许不同，可以查看下表：</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>设备类型</th>
-<th>登录方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>打印机</td>
-<td>1. 在打印机面板上查看 IP 2. 用浏览器访问该 IP 3. 输入管理员账号密码（默认常印在机身）</td>
-</tr>
-<tr>
-<td>交换机（网管型）</td>
-<td>1. 用 Console 线（串口）连接电脑 2. 用终端软件（PuTTY、SecureCRT）登录</td>
-</tr>
-<tr>
-<td><strong>摄像头 &#x2F; NAS</strong></td>
-<td>浏览器访问 IP 或专用客户端</td>
-</tr>
-<tr>
-<td>Linux 服务器</td>
-<td>SSH 登录后修改网络配置文件</td>
-</tr>
-</tbody></table>
-<ol start="3">
-<li>配置 IP 参数（一般内网就配置 IP 地址和子网掩码就可以）同时保存验证，比如用新 IP 能够重新访问设备的管理界面和用其他设备 ping 一下这个设备来测试连通。</li>
-</ol>
-<hr>
-<h4 id="不同局域网之间通信"><a href="#不同局域网之间通信" class="headerlink" title="不同局域网之间通信"></a>不同局域网之间通信</h4><ul>
-<li><h4 id="通过跳板机中转"><a href="#通过跳板机中转" class="headerlink" title="通过跳板机中转"></a>通过跳板机中转</h4></li>
-</ul>
-<p>跳板机：一个专门用于中转访问内网资源的 “堡垒” <strong>服务器</strong>，一般用于集中管理访问权限。</p>
-<p>比如公司的数据库服务器，或者内部的 API 服务部署在私有网络中，处于安全考虑不允许直接暴露到互联网中。所以他们<strong>没有公网 IP</strong>，同时又不可能和你在一个<strong>局域网</strong>内，这个时候就需要先登录一台有公网 IP 的跳板机，再从它跳转过去。</p>
-<p>这样目标服务器就实现了完全隔离，其防火墙只允许跳板机 IP 访问 SSH 端口。</p>
-<ul>
-<li>那么我们如何能够通过跳板机来连接目标服务器呢？</li>
-</ul>
-<p>最推荐的就是直接编辑<strong>本地电脑</strong>的 SSH 配置文件（~&#x2F;.ssh&#x2F;config 文件）。假如我们有如下信息</p>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>信息</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>跳板机</td>
-<td>公网 IP: <code>203.0.113.10</code>，用户名: <code>abc</code>，SSH 端口: <code>22</code></td>
-</tr>
-<tr>
-<td>目标服务器</td>
-<td>内网 IP: <code>10.0.1.20</code>，用户名: <code>cba</code></td>
-</tr>
-</tbody></table>
-<p>那么直接在配置文件中定义如下即可：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 跳板机定义</span><br>Host jump<br>  HostName <span class="hljs-number">203.0</span>.<span class="hljs-number">113.10</span><br>  <span class="hljs-keyword">User</span> <span class="hljs-title">ops</span><br>  Port <span class="hljs-number">22</span><br><br><span class="hljs-comment"># 目标服务器（通过跳板机访问）</span><br>Host db-server<br>  HostName <span class="hljs-number">10.0</span>.<span class="hljs-number">1.20</span><br>  <span class="hljs-keyword">User</span> <span class="hljs-title">app</span><br>  ProxyJump jump<br></code></pre></td></tr></table></figure>
+<p>实现可以是原生 JDBC -&gt; <code>UserDao</code> 接口 + 实现类或者 MyBatis -&gt; <code>@Mapper</code> 接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserMapper</span> &#123;<br>	User <span class="hljs-title function_">selectById</span><span class="hljs-params">(Long id)</span>;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(User user)</span>;<br>    List&lt;User&gt; <span class="hljs-title function_">findAll</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><code>vscode</code> 下载相应的插件以后读取这个配置，就能直接连接内部服务器，实现代码编辑和文件上传（vscode 内置的 SFTP ）。也有人用 xftp 或者 Filezilla 来实现文件传输，我没用过，所以暂时不评论。</p>
-<p>Ps. <code>vscode</code> 具体操作就是调出命令面板，remote-ssh: connet to host。</p>
+<blockquote>
+<p>✅<strong>DAO &#x3D; 数据的“搬运工”</strong>，只管“拿”和“存”。</p>
+</blockquote>
+<h3 id="2-Service（业务逻辑层）"><a href="#2-Service（业务逻辑层）" class="headerlink" title="2. Service（业务逻辑层）"></a>2. Service（业务逻辑层）</h3><p>职责：</p>
 <ul>
-<li><h4 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h4></li>
+<li><p>实现 <strong>核心业务逻辑</strong>（如注册、支付、订单处理）。</p>
+</li>
+<li><p><strong>协调多个 DAO 操作</strong>（例如：注册用户 + 发送邮件 + 记录日志）。</p>
+</li>
 </ul>
-<p>这个暂时没有接触到，先挖个坑。。。</p>
+<p>无状态，可被多个 Controller 复用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-meta">@Transactional</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserMapper userMapper;<br><br>    <span class="hljs-keyword">public</span> Long <span class="hljs-title function_">register</span><span class="hljs-params">(String name, String email)</span> &#123;<br>        <span class="hljs-comment">// 1. 校验逻辑（业务规则）</span><br>        <span class="hljs-keyword">if</span> (userMapper.existsByEmail(email)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BusinessException</span>(<span class="hljs-string">&quot;邮箱已存在&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 2. 调用 DAO 保存数据</span><br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(name, email);<br>        userMapper.insert(user);<br>        <span class="hljs-keyword">return</span> user.getId();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅<strong>Service &#x3D; 业务的“大脑”</strong>，决定“做什么”和“怎么做”。</p>
+</blockquote>
+<h3 id="3-Controller（控制层）"><a href="#3-Controller（控制层）" class="headerlink" title="3. Controller（控制层）"></a>3. Controller（控制层）</h3><p>职责：</p>
+<ul>
+<li><p>接收 <strong>HTTP 请求</strong></p>
+</li>
+<li><p><strong>解析请求参数</strong>（JSON、路径变量、表单）</p>
+</li>
+<li><p>调用 <strong>Service</strong> 执行业务</p>
+</li>
+<li><p><strong>封装响应结果</strong>（返回 JSON、跳转页面）</p>
+</li>
+</ul>
+<p>技术实现上一般是 Spring MVC 的 <code>@RestController</code> 或 <code>@Controller</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/api/users&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@PostMapping</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;Long&gt; <span class="hljs-title function_">register</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> RegisterRequest req)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> userService.register(req.getName(), req.getEmail());<br>        <span class="hljs-keyword">return</span> ResponseEntity.ok(userId);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ <strong>Controller &#x3D; 系统的“门面”</strong>，负责“接客”和“传话”。</p>
+</blockquote>
+<p>Ps. 传统 MVC (如早期 Spring MVC) ，Model 相当与这里的 Service + Dao + Entity, View 则是被独立出去，变成了前端（展示数据），Controller 上职责有一些变化（传统是协调 Model 和 View，而现在 Java web 中是负责接收 + 调用 Services）</p>
 
                 
               </div>
@@ -389,7 +341,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
 
@@ -409,8 +361,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>连网</div>
-      <div>https://dxblacksmith.github.io/2025/12/07/连网/</div>
+      <div>Java 分层架构</div>
+      <div>https://dxblacksmith.github.io/2026/02/04/Java-分层架构/</div>
     </div>
     <div class="license-meta">
       
@@ -422,7 +374,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年12月7日</div>
+          <div>2026年2月4日</div>
         </div>
       
       
@@ -454,18 +406,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/13/%E7%83%A4%E9%9D%A2%E7%AD%8B_Day01/" title="烤面筋 Day 01">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">烤面筋 Day 01</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/26/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="引用第三方库">
-                        <span class="hidden-mobile">引用第三方库</span>
+                      <a href="/2026/02/04/JDBC/" title="JDBC">
+                        <span class="hidden-mobile">JDBC</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
